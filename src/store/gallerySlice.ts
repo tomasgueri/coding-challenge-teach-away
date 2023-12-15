@@ -37,8 +37,10 @@ export const gallerySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    console.log('inside of the extraReducers')
     builder.addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[]; totalPages: number }>) => {
       console.log('state', state)
+      console.log('action', action)
       state.images = action.payload.images;
       state.totalPages = action.payload.totalPages;
     });
