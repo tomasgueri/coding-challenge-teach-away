@@ -24,7 +24,7 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
-  const [media, setMedia] = useState(data || []);
+  const [media, setMedia] = useState(data);
 
   const handleImageClick = (image: Image) => {
     console.log('selected image', image)

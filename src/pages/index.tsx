@@ -41,6 +41,7 @@ const HomePage = () => {
     //dispatch(fetchGallery(filters));
     dispatch(fetchGallery(filters)).then(() => {
       setIsLoading(false);
+      console.log('images useEffect', images)
     });
     console.log('UseEffect from home page is called')
   }, [dispatch, filters]);
@@ -52,6 +53,17 @@ const HomePage = () => {
   const handlePageChange = (newPage: number) => {
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
   };
+
+  useEffect(() => {
+    console.log('images useefecft', images)
+  }, [])
+
+  useEffect(() => {
+    if (images.length > 0) {
+      setIsLoading(false);
+    }
+  }, [images]);
+
 
   return (
     <>
