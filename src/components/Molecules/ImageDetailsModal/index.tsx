@@ -6,7 +6,7 @@ interface ImageDetails {
   id: string;
   title: string;
   description?: string;
-  link: string;
+  imageUrl: string;
   ups?: number; // Upvotes
   downs?: number; // Downvotes
   score?: number;
@@ -21,7 +21,7 @@ const ImageDetailsModal: React.FC<ImageDetailsModalProps> = ({ imageDetails, onC
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <Image src={imageDetails.link} alt={imageDetails.title} className="modal-image" width={150} height={300} />
+        <Image src={imageDetails.imageUrl} alt={imageDetails.title} className="modal-image" width={150} height={300} />
         <h3>{imageDetails.title}</h3>
         <p>{imageDetails.description}</p>
         <div className="modal-stats">

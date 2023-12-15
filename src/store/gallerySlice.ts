@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchGallery } from './galleryThunks';
 
 interface GalleryState {
-  images: any[]; // Define a more specific type for your images
+  images: any[]; // Replace 'any' with a more specific type
   searchQuery: string;
   currentPage: number;
   totalPages: number;
+  isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: GalleryState = {
@@ -13,6 +15,8 @@ const initialState: GalleryState = {
   searchQuery: '',
   currentPage: 1,
   totalPages: 0,
+  isLoading: false,
+  error: null,
 };
 
 export const gallerySlice = createSlice({
