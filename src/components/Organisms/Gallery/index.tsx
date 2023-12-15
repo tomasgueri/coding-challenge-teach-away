@@ -36,8 +36,13 @@ const Gallery: React.FC<GalleryProps> = ({ data }) => {
   };
 
   useEffect(() => {
+    console.log('se ejecuto setMedia')
     setMedia(data)
+    console.log('data inside useEffect', data)
   }, [data])
+
+  console.log('data', data)
+  console.log('media', media)
 
   return (
     <div className={styles.gallery}>
