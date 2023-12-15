@@ -37,7 +37,7 @@ describe('Gallery Component', () => {
 
   // Test to check if the Gallery component renders images correctly.
   test('renders images correctly', () => {
-    render(<Gallery images={mockImages} />);
+    render(<Gallery data={mockImages} />);
     const images = screen.getAllByRole('img') as HTMLImageElement[];
 
     expect(images).toHaveLength(mockImages.length);
@@ -52,7 +52,7 @@ describe('Gallery Component', () => {
 
   // Test to verify if the modal opens upon clicking an image.
   test('opens modal on image click', () => {
-    render(<Gallery images={mockImages} />);
+    render(<Gallery data={mockImages} />);
     const firstImageCard = screen.getByText('Image 1').closest('div');
     if (firstImageCard) {
       fireEvent.click(firstImageCard);
@@ -63,7 +63,7 @@ describe('Gallery Component', () => {
 
   // Test to confirm that the modal closes when the close button is clicked.
   test('closes modal on close button click', () => {
-    render(<Gallery images={mockImages} />);
+    render(<Gallery data={mockImages} />);
     const firstImageCard = screen.getByText('Image 1').closest('div');
     if (firstImageCard) {
       fireEvent.click(firstImageCard);

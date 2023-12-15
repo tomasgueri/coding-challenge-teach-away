@@ -5,7 +5,7 @@ import styles from './gallery-filters.module.scss';
 import Container from '../../Atoms/Container';
 
 interface GalleryFiltersProps {
-  onFilterChange: (filters: any) => void; // Replace 'any' with a more specific type as per your filter structure
+  onFilterChange: (filters: {}) => void;
 }
 
 const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {

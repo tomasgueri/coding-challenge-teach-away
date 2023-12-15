@@ -55,15 +55,19 @@ const HomePage = () => {
       </Head>
       <Layout>
         <Header />
-        <GalleryFilters onFilterChange={handleFilterChange} />
-        <Container >
-          <Gallery images={images} />
-          <Pagination
-            currentPage={filters.page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </Container>
+        { images &&
+          <>
+            <GalleryFilters onFilterChange={handleFilterChange} />
+            <Container >
+              <Gallery data={images} />
+              <Pagination
+                currentPage={filters.page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </Container>
+          </>
+        }
       </Layout>
     </>
   );

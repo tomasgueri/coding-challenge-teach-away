@@ -8,7 +8,7 @@ const mockImage = {
   id: '1',
   title: 'Test Image',
   description: 'Test Description',
-  link: 'http://testimage.jpg',
+  imageUrl: 'http://testimage.jpg',
   ups: 100,
   downs: 50,
   score: 75

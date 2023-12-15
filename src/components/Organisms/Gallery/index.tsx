@@ -18,10 +18,10 @@ type Image = {
 };
 
 interface GalleryProps {
-  images: Image[];
+  data: Image[];
 }
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => {
+const Gallery: React.FC<GalleryProps> = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   const handleImageClick = (image: Image) => {
@@ -35,7 +35,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
   return (
     <div className={styles.gallery}>
-      {images && images?.map((item) => {
+      {data.map((item) => {
         // Check if the item is an image or a video
         const isVideo = item.images[0]?.type?.includes('video');
 
