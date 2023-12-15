@@ -11,7 +11,7 @@ interface ImgurApiResponseItem {
   title: string;
   description?: string;
   link: string;
-  images?: { link: string }[];
+  images: { link: string }[];
 }
 
 export const fetchGallery = createAsyncThunk<GalleryApiResponse, { section: string; sort: string; window: string; page: number }>(
@@ -23,7 +23,7 @@ export const fetchGallery = createAsyncThunk<GalleryApiResponse, { section: stri
       images: response?.data.map((item: ImgurApiResponseItem) => {
         return {
           ...item,
-          imageUrl: item.images ? item.images[0].link : item.link, // For albums, use the first image
+          imageUrl: item.images.length > 0 ? item?.images[0]?.link : item.link, // For albums, use the first image
         };
       }),
       totalPages: calculateTotalPages(response?.data, 20), // Implement this function based on the response

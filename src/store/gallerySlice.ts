@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchGallery } from './galleryThunks';
 
 interface GalleryState {
-  images: any[]; // Replace 'any' with a more specific type
+  images: any[];
   searchQuery: string;
   currentPage: number;
   totalPages: number;
