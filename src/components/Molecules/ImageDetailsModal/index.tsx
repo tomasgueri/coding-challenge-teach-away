@@ -1,5 +1,6 @@
 import React from 'react';
 import './imageDetailsModal.module.scss';
+import Image from 'next/image';
 
 interface ImageDetails {
   id: string;
@@ -20,7 +21,7 @@ const ImageDetailsModal: React.FC<ImageDetailsModalProps> = ({ imageDetails, onC
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <img src={imageDetails.link} alt={imageDetails.title} className="modal-image"/>
+        <Image src={imageDetails.link} alt={imageDetails.title} className="modal-image" width={150} height={300} />
         <h3>{imageDetails.title}</h3>
         <p>{imageDetails.description}</p>
         <div className="modal-stats">

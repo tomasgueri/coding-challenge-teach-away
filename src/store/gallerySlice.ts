@@ -33,8 +33,8 @@ export const gallerySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchGallery.fulfilled, (state, action) => {
-      state.images = action.payload;
+    builder.addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[]; totalPages: number }>) => {
+      state.images = action.payload.images;
       state.totalPages = action.payload.totalPages;
     });
   },

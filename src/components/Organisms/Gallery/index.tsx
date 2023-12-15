@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './gallery.module.scss';
 import ImageDetailsModal from '../../Molecules/ImageDetailsModal';
+import Image from 'next/image';
 
 type Image = {
   id: string;
@@ -31,7 +32,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     <div className={styles.gallery}>
       {images?.map((image) => (
         <div key={image.id} className={styles.imageCard} onClick={() => handleImageClick(image)}>
-          <img src={image.link} alt={image.title} className={styles.image} />
+          <Image src={image.link} alt={image.title} className={styles.image} width={150} height={300} />
           <div className={styles.imageOverlay}>
             <div className={styles.imageTitle}>{image.title}</div>
             <div className={styles.imageDescription}>{image.description}</div>

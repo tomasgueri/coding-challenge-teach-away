@@ -3,14 +3,27 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Gallery from '../Organisms/Gallery';
 import '@testing-library/jest-dom';
 
+interface MockImageDetailsModalProps {
+  imageDetails: {
+    title: string;
+  };
+  onClose: () => void;
+}
+
 // Mocks the ImageDetailsModal component for testing.
 // This ensures that tests focus on the Gallery component's behavior.
-jest.mock('../Molecules/ImageDetailsModal', () => (props: any) => (
-  <div data-testid="mock-image-details-modal">
-    Mocked Modal: {props.imageDetails.title}
-    <button onClick={props.onClose}>Close Modal</button>
-  </div>
-));
+jest.mock('../Molecules/ImageDetailsModal', () => {
+  const MockImageDetailsModal = (props: MockImageDetailsModalProps) => (
+    <div data-testid="mock-image-details-modal">
+      Mocked Modal: {props.imageDetails.title}
+      <button onClick={props.onClose}>Close Modal</button>
+    </div>
+  );
+
+  MockImageDetailsModal.displayName = 'MockImageDetailsModal';
+
+  return MockImageDetailsModal;
+});
 
 // Sample images data used for testing the Gallery component.
 const mockImages = [
@@ -25,11 +38,17 @@ describe('Gallery Component', () => {
   // Test to check if the Gallery component renders images correctly.
   test('renders images correctly', () => {
     render(<Gallery images={mockImages} />);
-    const images = screen.getAllByRole('img');
+    const images = screen.getAllByRole('img') as HTMLImageElement[];
+
     expect(images).toHaveLength(mockImages.length);
-    expect(images[0]).toHaveAttribute('src', 'http://image1.jpg');
-    expect(images[0]).toHaveAttribute('alt', 'Image 1');
+    // Check if the alt text is correctly set
+    expect(images[0].alt).toBe('Image 1');
+
+    // Optionally, check if the image URL is encoded in the src attribute
+    const encodedImageUrl = encodeURIComponent('http://image1.jpg');
+    expect(images[0].src).toContain(encodedImageUrl);
   });
+
 
   // Test to verify if the modal opens upon clicking an image.
   test('opens modal on image click', () => {
