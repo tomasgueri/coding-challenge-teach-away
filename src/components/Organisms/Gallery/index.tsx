@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './gallery.module.scss';
+
+// Components
 import ImageDetailsModal from '../../Molecules/ImageDetailsModal';
-import ImageCard from '../../Molecules/ImageCard';
-import VideoCard from '../../Molecules/VideoCard';
+import ImageCard from '../../Molecules/Cards/ImageCard';
+import VideoCard from '../../Molecules/Cards/VideoCard';
 
 type Image = {
   id: string;
@@ -38,27 +40,26 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
         const isVideo = item.images[0]?.type?.includes('video');
 
         console.log('item', item);
-
         return isVideo ? (
           <VideoCard
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          description={item.description}
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            description={item.description}
             videoUrl={item.imageUrl}
             onClick={() => handleImageClick(item)}
-            />
-            ) : (
-              <ImageCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              imageUrl={item.imageUrl}
-              onClick={() => handleImageClick(item)}
-              />
-              );
-            })}
+          />
+        ) : (
+          <ImageCard
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            imageUrl={item.imageUrl}
+            onClick={() => handleImageClick(item)}
+          />
+        );
+      })}
 
       {selectedImage && <ImageDetailsModal imageDetails={selectedImage} onClose={handleCloseModal} />}
     </div>

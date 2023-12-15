@@ -9,6 +9,7 @@ import { fetchGallery } from '../store/galleryThunks';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import Header from '../components/Molecules/Header';
+import Container from '../components/Atoms/Container';
 import GalleryFilters from '../components/Molecules/GalleryFilters';
 import Gallery from '../components/Organisms/Gallery';
 import Pagination from '../components/Molecules/Pagination';
@@ -35,7 +36,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchGallery(filters));
-    console.log('UuseEffect from home page is called')
+    console.log('UseEffect from home page is called')
   }, [dispatch, filters]);
 
   const handleFilterChange = (newFilters: Partial<Filters>) => {
@@ -55,12 +56,14 @@ const HomePage = () => {
       <Layout>
         <Header />
         <GalleryFilters onFilterChange={handleFilterChange} />
-        <Gallery images={images} />
-        <Pagination
-          currentPage={filters.page}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        <Container >
+          <Gallery images={images} />
+          <Pagination
+            currentPage={filters.page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </Container>
       </Layout>
     </>
   );

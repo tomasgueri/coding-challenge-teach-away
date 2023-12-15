@@ -38,6 +38,12 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  // Paddings
+  --padding-lg: 3rem;
+  --padding-md: 2rem;
+  --padding-sm: 1.5rem;
+  --padding-xs: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {

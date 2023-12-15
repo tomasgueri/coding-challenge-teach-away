@@ -1,7 +1,7 @@
 // ImageCard.tsx
 import React from 'react';
 import Image from 'next/image';
-import styles from './image-card.module.scss'; // Update with your actual path to the SASS file
+import styles from './cards.module.scss';
 
 interface ImageCardProps {
   id: string;
@@ -13,7 +13,7 @@ interface ImageCardProps {
 
 const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl, onClick }) => {
   return (
-    <div key={id} className={styles.imageCard} onClick={onClick}>
+    <div key={id} className={styles.card} onClick={onClick}>
       <Image
         src={imageUrl}
         alt={title}
@@ -22,9 +22,9 @@ const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl,
         height={300}
         layout="responsive"
       />
-      <div className={styles.imageOverlay}>
-        <div className={styles.imageTitle}>{title}</div>
-        <div className={styles.imageDescription}>{description}</div>
+      <div className={styles.infoOverlay}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.description}>{description}</div>
       </div>
     </div>
   );
