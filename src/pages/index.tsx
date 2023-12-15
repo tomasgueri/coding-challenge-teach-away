@@ -55,7 +55,7 @@ const HomePage = () => {
       </Head>
       <Layout>
         <Header />
-        { images &&
+        { images.length > 0 &&
           <>
             <GalleryFilters onFilterChange={handleFilterChange} />
             <Container >
