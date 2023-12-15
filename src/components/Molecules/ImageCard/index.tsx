@@ -14,7 +14,14 @@ interface ImageCardProps {
 const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl, onClick }) => {
   return (
     <div key={id} className={styles.imageCard} onClick={onClick}>
-      <Image src={imageUrl} alt={title} className={styles.image} width={150} height={300} />
+      <Image
+        src={imageUrl}
+        alt={title}
+        className={styles.image}
+        width={150}
+        height={300}
+        layout="responsive"
+      />
       <div className={styles.imageOverlay}>
         <div className={styles.imageTitle}>{title}</div>
         <div className={styles.imageDescription}>{description}</div>

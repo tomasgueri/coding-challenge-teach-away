@@ -18,7 +18,7 @@ export const fetchGallery = createAsyncThunk<GalleryApiResponse, { section: stri
   'gallery/fetchGallery',
   async (params) => {
     const response = await getGallery(params.section, params.sort, params.window, params.page);
-
+    console.log('response', response)
     return {
       images: response?.data.map((item: ImgurApiResponseItem) => {
         return {

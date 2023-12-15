@@ -36,6 +36,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
         // Check if the item is an image or a video
         const isVideo = item.type?.includes('video');
 
+        console.log('item', item);
+
         return isVideo ? (
           <VideoCard
             key={item.id}
