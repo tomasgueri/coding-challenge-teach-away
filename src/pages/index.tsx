@@ -25,6 +25,7 @@ type Filters = {
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { images } = useSelector((state: RootState) => state.gallery);
+  console.log('images', images)
   const [totalPages, setTotalPages] = useState(10);
   const [filters, setFilters] = useState({
     section: 'hot',
@@ -55,19 +56,15 @@ const HomePage = () => {
       </Head>
       <Layout>
         <Header />
-        { images.length > 0 &&
-          <>
-            <GalleryFilters onFilterChange={handleFilterChange} />
-            <Container >
-              <Gallery data={images} />
-              <Pagination
-                currentPage={filters.page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </Container>
-          </>
-        }
+        <GalleryFilters onFilterChange={handleFilterChange} />
+        <Container >
+          <Gallery data={images} />
+          <Pagination
+            currentPage={filters.page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </Container>
       </Layout>
     </>
   );
