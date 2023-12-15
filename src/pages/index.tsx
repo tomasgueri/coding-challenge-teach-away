@@ -13,6 +13,7 @@ import Container from '../components/Atoms/Container';
 import GalleryFilters from '../components/Molecules/GalleryFilters';
 import Gallery from '../components/Organisms/Gallery';
 import Pagination from '../components/Molecules/Pagination';
+import Skeleton from '../components/Molecules/Skeleton';
 
 type Filters = {
   section: string;
@@ -27,6 +28,7 @@ const HomePage = () => {
   const { images } = useSelector((state: RootState) => state.gallery);
   console.log('images', images)
   const [totalPages, setTotalPages] = useState(10);
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     section: 'hot',
     sort: 'viral',
@@ -36,7 +38,10 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchGallery(filters));
+    //dispatch(fetchGallery(filters));
+    dispatch(fetchGallery(filters)).then(() => {
+      setIsLoading(false);
+    });
     console.log('UseEffect from home page is called')
   }, [dispatch, filters]);
 
@@ -58,12 +63,24 @@ const HomePage = () => {
         <Header />
         <GalleryFilters onFilterChange={handleFilterChange} />
         <Container >
-          <Gallery data={images} />
+          {/* <Gallery data={images} />
           <Pagination
             currentPage={filters.page}
             totalPages={totalPages}
             onPageChange={handlePageChange}
-          />
+          /> */}
+          {isLoading ? (
+            <Skeleton /> // Your skeleton loader component
+          ) : (
+            <>
+              <Gallery data={images} />
+              <Pagination
+                currentPage={filters.page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </>
+          )}
         </Container>
       </Layout>
     </>
