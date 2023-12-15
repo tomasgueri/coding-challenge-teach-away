@@ -1,7 +1,7 @@
 // ImageCard.tsx
 import React from 'react';
 import Image from 'next/image';
-import styles from './ImageCard.module.scss'; // Update with your actual path to the SASS file
+import styles from './image-card.module.scss'; // Update with your actual path to the SASS file
 
 interface ImageCardProps {
   id: string;

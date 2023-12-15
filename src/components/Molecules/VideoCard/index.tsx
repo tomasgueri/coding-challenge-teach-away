@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './videoCard.module.scss'; // Update with your actual path to the SASS file
+import styles from './video-card.module.scss'; // Update with your actual path to the SASS file
 
 interface VideoCardProps {
   id: string;
