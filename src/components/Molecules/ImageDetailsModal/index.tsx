@@ -1,5 +1,5 @@
 import React from 'react';
-import './imageDetailsModal.module.scss';
+import './image-details-modal.module.scss';
 import Image from 'next/image';
 
 interface ImageDetails {
@@ -18,6 +18,7 @@ interface ImageDetailsModalProps {
 }
 
 const ImageDetailsModal: React.FC<ImageDetailsModalProps> = ({ imageDetails, onClose }) => {
+  console.log('imageDetails', imageDetails)
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>

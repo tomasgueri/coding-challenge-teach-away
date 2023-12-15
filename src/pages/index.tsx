@@ -35,6 +35,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchGallery(filters));
+    console.log('UuseEffect from home page is called')
   }, [dispatch, filters]);
 
   const handleFilterChange = (newFilters: Partial<Filters>) => {

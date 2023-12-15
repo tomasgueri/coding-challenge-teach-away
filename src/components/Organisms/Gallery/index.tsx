@@ -23,6 +23,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   const handleImageClick = (image: Image) => {
+    console.log('selected image', image)
     setSelectedImage(image);
   };
 
@@ -32,32 +33,32 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
   return (
     <div className={styles.gallery}>
-      {images?.map((item) => {
+      {images && images?.map((item) => {
         // Check if the item is an image or a video
-        const isVideo = item.images[0].type.includes('video');
+        const isVideo = item.images[0]?.type?.includes('video');
 
         console.log('item', item);
 
         return isVideo ? (
           <VideoCard
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          description={item.description}
             videoUrl={item.imageUrl}
             onClick={() => handleImageClick(item)}
-          />
-        ) : (
-          <ImageCard
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            onClick={() => handleImageClick(item)}
-          />
-        );
-      })}
+            />
+            ) : (
+              <ImageCard
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              imageUrl={item.imageUrl}
+              onClick={() => handleImageClick(item)}
+              />
+              );
+            })}
 
       {selectedImage && <ImageDetailsModal imageDetails={selectedImage} onClose={handleCloseModal} />}
     </div>
