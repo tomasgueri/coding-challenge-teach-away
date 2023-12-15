@@ -40,7 +40,7 @@ const HomePage = () => {
   useEffect(() => {
     //dispatch(fetchGallery(filters));
     dispatch(fetchGallery(filters)).then(() => {
-      setIsLoading(false);
+      //setIsLoading(false);
       console.log('images useEffect', images)
     });
     console.log('UseEffect from home page is called')
