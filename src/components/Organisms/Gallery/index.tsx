@@ -9,7 +9,7 @@ type Image = {
   title: string;
   description?: string;
   imageUrl: string;
-  type?: string;
+  images: any[];
   ups?: number; // Upvotes
   downs?: number; // Downvotes
   score?: number;
@@ -34,7 +34,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     <div className={styles.gallery}>
       {images?.map((item) => {
         // Check if the item is an image or a video
-        const isVideo = item.type?.includes('video');
+        const isVideo = item.images[0].type.includes('video');
 
         console.log('item', item);
 

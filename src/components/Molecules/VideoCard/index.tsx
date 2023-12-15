@@ -10,6 +10,7 @@ interface VideoCardProps {
 }
 
 const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl, onClick }) => {
+  console.log('videoUrl', videoUrl)
   return (
     <div key={id} className={styles.videoCard} onClick={onClick}>
       <video className={styles.video} controls>
