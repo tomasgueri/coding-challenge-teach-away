@@ -23,7 +23,7 @@ const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
   const [sort, setSort] = useState('viral');
 
   const handleFilterChange = () => {
-    onFilterChange({ section, showViral, window, sort });
+    onFilterChange({ section, sort, window, showViral });
   };
 
   return (

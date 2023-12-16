@@ -22,13 +22,13 @@ interface ImgurApiResponseItem {
 
 export const fetchGallery = createAsyncThunk<
   GalleryApiResponse,
-  { section: string; sort: string; window: string; },
+  { section: string; sort: string; window: string; showViral: boolean; },
   { rejectValue: string }
 >(
   'gallery/fetchGallery',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await getGallery(params.section, params.sort, params.window);
+      const response = await getGallery(params.section, params.sort, params.window, params.showViral);
       console.log('response', response)
       return {
         images: response?.data.map((item: ImgurApiResponseItem) => {
