@@ -26,7 +26,6 @@ type Filters = {
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { images } = useSelector((state: RootState) => state.gallery);
-  console.log('images', images)
   const [totalPages, setTotalPages] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
@@ -38,25 +37,19 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    //dispatch(fetchGallery(filters));
-    dispatch(fetchGallery(filters)).then(() => {
-      //setIsLoading(false);
-      console.log('images useEffect', images)
-    });
-    console.log('UseEffect from home page is called')
+    dispatch(fetchGallery(filters))
+
   }, [dispatch, filters]);
 
   const handleFilterChange = (newFilters: Partial<Filters>) => {
     setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
+    setIsLoading(true);
   };
 
   const handlePageChange = (newPage: number) => {
+    console.log('newPage', newPage)
     setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
   };
-
-  useEffect(() => {
-    console.log('images useefecft', images)
-  }, [])
 
   useEffect(() => {
     if (images.length > 0) {
@@ -74,15 +67,9 @@ const HomePage = () => {
       <Layout>
         <Header />
         <GalleryFilters onFilterChange={handleFilterChange} />
-        <Container >
-          {/* <Gallery data={images} />
-          <Pagination
-            currentPage={filters.page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          /> */}
+        <Container>
           {isLoading ? (
-            <Skeleton /> // Your skeleton loader component
+            <Skeleton />
           ) : (
             <>
               <Gallery data={images} />

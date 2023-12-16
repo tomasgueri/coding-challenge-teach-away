@@ -14,20 +14,29 @@ interface ImgurApiResponseItem {
   images: { link: string }[];
 }
 
-export const fetchGallery = createAsyncThunk<GalleryApiResponse, { section: string; sort: string; window: string; page: number }>(
+export const fetchGallery = createAsyncThunk<
+  GalleryApiResponse,
+  { section: string; sort: string; window: string; page: number },
+  { rejectValue: string }
+>(
   'gallery/fetchGallery',
-  async (params) => {
-    const response = await getGallery(params.section, params.sort, params.window, params.page);
-    console.log('response', response)
-    return {
-      images: response?.data.map((item: ImgurApiResponseItem) => {
-        return {
-          ...item,
-          imageUrl: item.images.length > 0 ? item?.images[0]?.link : item.link, // For albums, use the first image
-        };
-      }),
-      totalPages: calculateTotalPages(response?.data, 20), // Implement this function based on the response
-    };
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await getGallery(params.section, params.sort, params.window, params.page);
+      console.log('response', response)
+      return {
+        images: response?.data.map((item: ImgurApiResponseItem) => {
+          return {
+            ...item,
+            imageUrl: Array.isArray(item.images) && item.images?.length > 0 ? item?.images[0]?.link : item.link, // For albums, use the first image
+          };
+        }),
+        totalPages: calculateTotalPages(response?.data, 20), // Implement this function based on the response
+      };
+    } catch (error: any) {
+      console.log('Error: ', error);
+      return rejectWithValue('Failed to fetch gallery');
+    }
   }
 );
 
@@ -38,4 +47,3 @@ function calculateTotalPages(response: ImgurApiResponseItem[], itemsPerPage: num
   const totalItems = response.length; // Replace with the actual total items if available
   return Math.ceil(totalItems / itemsPerPage);
 }
-

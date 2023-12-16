@@ -1,11 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import styles from './gallery.module.scss';
 
 // Components
 import ImageDetailsModal from '../../Molecules/ImageDetailsModal';
 import ImageCard from '../../Molecules/Cards/ImageCard';
 import VideoCard from '../../Molecules/Cards/VideoCard';
-import Skeleton from '../../Molecules/Skeleton';
 
 type Image = {
   id: string;
@@ -13,9 +12,11 @@ type Image = {
   description?: string;
   imageUrl: string;
   images: any[];
+  tags: any[];
   ups?: number; // Upvotes
   downs?: number; // Downvotes
   score?: number;
+  isVideo: boolean;
 };
 
 interface GalleryProps {
@@ -24,56 +25,51 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
-  const [media, setMedia] = useState(data);
 
   const handleImageClick = (image: Image) => {
-    console.log('selected image', image)
-    setSelectedImage(image);
+    // Create a new object with all properties of the item plus the isVideo property
+    const isVideo = Array.isArray(image.images) && image.images[0].type?.includes('video');
+    const imageWithVideoInfo = {
+      ...image,
+      isVideo: isVideo,
+    };
+
+    setSelectedImage(imageWithVideoInfo);
   };
 
   const handleCloseModal = () => {
     setSelectedImage(null);
   };
 
-  useEffect(() => {
-    console.log('se ejecuto setMedia')
-    setMedia(data)
-    console.log('data inside useEffect', data)
-  }, [data])
-
-  console.log('data', data)
-  console.log('media', media)
-
   return (
     <div className={styles.gallery}>
-      { media ?
-        data.map((item) => {
-          // Check if the item is an image or a video
-          const isVideo = item.images[0]?.type?.includes('video');
+      {data.map((item) => {
+        // Check if the item is an image or a video
+        const isVideo = Array.isArray(item.images) ? ( item.images[0].type?.includes('video') ?? false ) : false;
+        //item.isVideo = isVideo;
 
-          console.log('item', item);
-          return isVideo ? (
-            <VideoCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              videoUrl={item.imageUrl}
-              onClick={() => handleImageClick(item)}
-            />
-          ) : (
-            <ImageCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              imageUrl={item.imageUrl}
-              onClick={() => handleImageClick(item)}
-            />
-          );
-        })
-      :
-        <Skeleton />
+        return isVideo ? (
+          <VideoCard
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            videoUrl={item.imageUrl}
+            tags={item.tags}
+            onClick={() => handleImageClick(item)}
+          />
+        ) : (
+          <ImageCard
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            imageUrl={item.imageUrl}
+            tags={item.tags}
+            onClick={() => handleImageClick(item)}
+          />
+        );
+      })
       }
 
       {selectedImage && <ImageDetailsModal imageDetails={selectedImage} onClose={handleCloseModal} />}

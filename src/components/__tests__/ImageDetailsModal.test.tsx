@@ -11,7 +11,8 @@ const mockImage = {
   imageUrl: 'http://testimage.jpg',
   ups: 100,
   downs: 50,
-  score: 75
+  score: 75,
+  isVideo: false,
 };
 
 /**

@@ -27,9 +27,9 @@ jest.mock('../Molecules/ImageDetailsModal', () => {
 
 // Sample images data used for testing the Gallery component.
 const mockImages = [
-  { id: '1', title: 'Image 1', description: 'Desc 1', imageUrl: 'http://image1.jpg', images: [] },
-  { id: '2', title: 'Image 2', description: 'Desc 2', imageUrl: 'http://image2.jpg', images: [{type: 'video/mp4'}]},
-  { id: '3', title: 'Image 3', description: 'Desc 3', imageUrl: 'http://image3.jpg', images: [] },
+  { id: '1', title: 'Image 1', description: 'Desc 1', imageUrl: 'http://image1.jpg', images: [], tags: [], isVideo: false },
+  { id: '2', title: 'Image 2', description: 'Desc 2', imageUrl: 'http://image2.jpg', images: [{type: 'video/mp4'}], tags: [], isVideo: true },
+  { id: '3', title: 'Image 3', description: 'Desc 3', imageUrl: 'http://image3.jpg', images: [], tags: [], isVideo: false },
 ];
 
 // Test suite for Gallery component

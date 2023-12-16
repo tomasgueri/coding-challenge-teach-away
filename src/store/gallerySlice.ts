@@ -3,7 +3,6 @@ import { fetchGallery } from './galleryThunks';
 
 interface GalleryState {
   images: any[];
-  searchQuery: string;
   currentPage: number;
   totalPages: number;
   isLoading: boolean;
@@ -12,7 +11,6 @@ interface GalleryState {
 
 const initialState: GalleryState = {
   images: [],
-  searchQuery: '',
   currentPage: 1,
   totalPages: 0,
   isLoading: false,
@@ -26,9 +24,6 @@ export const gallerySlice = createSlice({
     setImages: (state, action: PayloadAction<any[]>) => {
       state.images = action.payload;
     },
-    setSearchQuery: (state, action: PayloadAction<string>) => {
-      state.searchQuery = action.payload;
-    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
@@ -37,16 +32,23 @@ export const gallerySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    console.log('inside of the extraReducers')
-    builder.addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[]; totalPages: number }>) => {
-      console.log('state', state)
-      console.log('action', action)
-      state.images = action.payload.images;
-      state.totalPages = action.payload.totalPages;
-    });
+    builder
+      .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[]; totalPages: number }>) => {
+        state.images = action.payload.images;
+        state.totalPages = action.payload.totalPages;
+        state.isLoading = false;
+      })
+      .addCase(fetchGallery.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchGallery.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload ?? null;
+      });
   },
 });
 
-export const { setImages, setSearchQuery, setCurrentPage, setTotalPages } = gallerySlice.actions;
+export const { setImages, setCurrentPage, setTotalPages } = gallerySlice.actions;
 
 export const galleryReducer = gallerySlice.reducer;

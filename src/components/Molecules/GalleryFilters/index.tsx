@@ -5,34 +5,78 @@ import styles from './gallery-filters.module.scss';
 import Container from '../../Atoms/Container';
 
 interface GalleryFiltersProps {
-  onFilterChange: (filters: {}) => void;
+  onFilterChange: (filters: any) => void;
 }
 
 const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
-  const [section, setSection] = useState<string>('hot');
-  const [showViral, setShowViral] = useState<boolean>(true);
+  const [section, setSection] = useState('hot');
+  const [showViral, setShowViral] = useState(true);
+  const [window, setWindow] = useState('day');
+  const [sort, setSort] = useState('viral');
 
   const handleFilterChange = () => {
-    onFilterChange({ section, showViral });
+    onFilterChange({ section, showViral, window, sort });
   };
 
   return (
-    <div className={styles["gallery-filters"]}>
+    <div className={styles['gallery-filters']}>
       <Container>
-        <select value={section} onChange={(e) => setSection(e.target.value)} className={styles["filter-select"]}>
-          <option value="hot">Hot</option>
-          <option value="top">Top</option>
-          <option value="user">User</option>
-        </select>
-        <label className={styles["filter-label"]}>
-          <input
-            type="checkbox"
-            checked={showViral}
-            onChange={(e) => setShowViral(e.target.checked)}
-          />
-          Show Viral
-        </label>
-        <button onClick={handleFilterChange} className={styles["filter-button"]}>Apply Filters</button>
+        <div className={styles.filtersRight}>
+          <div className={styles.selectWrapper}>
+            <select
+              value={section}
+              onChange={(e) => setSection(e.target.value)}
+              className={styles.selectElement}
+            >
+              <option value="hot">Hot</option>
+              <option value="top">Top</option>
+              <option value="user">User</option>
+            </select>
+          </div>
+
+          <div>
+          <label className={styles.switch}>
+            <input
+              type="checkbox"
+              checked={showViral}
+              onChange={() => setShowViral(!showViral)}
+            />
+            <span className={styles.slider}></span>
+          </label>
+          <span>Show Viral</span>
+          </div>
+
+          <div className={styles.selectWrapper}>
+            <select
+              value={window}
+              onChange={(e) => setWindow(e.target.value)}
+              className={styles.selectElement}
+            >
+              <option value="day">Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+              <option value="all">All</option>
+            </select>
+          </div>
+
+          <div className={styles.selectWrapper}>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className={styles.selectElement}
+            >
+              <option value="viral">Viral</option>
+              <option value="top">Top</option>
+              <option value="time">Time</option>
+            </select>
+          </div>
+
+          <button onClick={handleFilterChange} className={styles.filterButton}>
+            Apply Filters
+          </button>
+        </div>
+
       </Container>
     </div>
   );

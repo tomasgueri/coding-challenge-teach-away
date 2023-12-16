@@ -6,10 +6,11 @@ interface VideoCardProps {
   title: string;
   description?: string;
   videoUrl: string;
+  tags: any[];
   onClick: () => void;
 }
 
-const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl, onClick }) => {
+const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl, tags, onClick }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
@@ -25,11 +26,10 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl,
     }
   };
 
-  console.log('videoUrl', videoUrl)
   return (
     <div
       key={id}
-      className={styles.card}
+      className={`${styles.card} ${styles.videoCard}`}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -39,8 +39,15 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl,
         Your browser does not support the video tag.
       </video>
       <div className={styles.infoOverlay}>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.description}>{description}</div>
+        { title && <div className={styles.title}>{title}</div> }
+        { description && <div className={styles.description}>{description}</div> }
+        { tags.length > 0 &&
+          <div className={styles.tagsContainer}>
+            {tags.slice(0, 4).map((tag, index) => (
+              <span key={index} className={styles.tag}>{tag.name}</span>
+            ))}
+          </div>
+        }
       </div>
     </div>
   );

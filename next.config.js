@@ -7,7 +7,7 @@ const nextConfig = {
         hostname: '**.imgur.com',
       },
     ],
-    //domains: ['i.imgur.com'],
+    domains: ['i.imgur.com'],
   },
 };
 

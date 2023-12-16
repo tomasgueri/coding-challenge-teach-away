@@ -8,6 +8,11 @@ const Skeleton = () => {
       <div className={styles.skeletonItem}></div>
       <div className={styles.skeletonItem}></div>
       <div className={styles.skeletonItem}></div>
+      <div className={styles.skeletonItem}></div>
+      <div className={styles.skeletonItem}></div>
+      <div className={styles.skeletonItem}></div>
+      <div className={styles.skeletonItem}></div>
+      <div className={styles.skeletonItem}></div>
     </div>
   );
 };

@@ -1,7 +1,13 @@
 .card {
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: auto;
+  min-height: 450px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 2rem; // Space between cards
@@ -25,65 +31,106 @@
     top: 0;
     left: 0;
     pointer-events: none; // Prevents interaction with the video
+    min-height: 100%;
   }
 
-  .info-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 1rem;
-    transition: opacity 0.3s ease-in-out;
-    opacity: 0; // Default state is invisible
+  .infoOverlay {
+    background: rgba(50, 50, 50, 0.85);
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    border-radius: 0 0 8px 8px;
-
-    .title,
-    .description {
-      margin: 0;
-      padding: 0.25rem 0;
-    }
-
-    .title {
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
-
-    .description {
-      font-size: 1rem;
-      max-height: 4rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; // Show max 2 lines
-      -webkit-box-orient: vertical;
-    }
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #f0f0f0; // Lighter text for better readability
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    opacity: 1; // Make it always visible
+    min-height: 30px;
   }
 
   &:hover .info-overlay {
-    opacity: 1; // Visible on hover
+    opacity: 1;
   }
 }
 
-/* .image {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
+.videoCard {
+  &:before {
+    content: '▶';
+    font-size: 3rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
 
-  &:hover {
-    transform: scale(1.05);
+  // Hide the play icon on hover
+  &:hover:before {
+    opacity: 0;
+    transition-delay: 0.3s;
   }
 }
-.video {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+
+.imageCard {
+  overflow: hidden; // Prevents the image from spilling out during zoom
+
+  img {
+    transition: transform 0.3s ease;
   }
-*/
+
+  &:hover img {
+    transform: scale(1.05); // Zoom effect on hover
+  }
+}
+
+.title,
+.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.4rem;
+}
+
+.description {
+  font-size: 0.8rem;
+  -webkit-line-clamp: 2; // Limit to two lines
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.25rem;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  background: #777;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
