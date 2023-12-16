@@ -5,7 +5,7 @@
 This web application is a simple Imgur Gallery Browser developed as part of a coding challenge. It allows users to browse the Imgur gallery, displaying images and videos in a grid of thumbnails, complete with descriptions, upvotes, downvotes, and scores.
 
 
-### Features
+## Features
 
 - Display gallery images and videos in a grid of thumbnails.
 - Filter gallery items by sections: hot, top, user.
@@ -16,7 +16,7 @@ This web application is a simple Imgur Gallery Browser developed as part of a co
 - Responsive design for various screen sizes.
 
 
-### Technical Stack
+## Technical Stack
 
 - Framework: React with Redux
 - Styling: SASS with CSS Modules
@@ -29,7 +29,7 @@ This web application is a simple Imgur Gallery Browser developed as part of a co
 - Services: Dedicated service layer for API interactions
 
 
-### Approach and Architecture
+## Approach and Architecture
 
 - Atomic Design: This methodology was used to create a consistent and scalable structure for UI components.
 - fetchWithCache Method: Implemented to optimize API calls by caching responses, reducing unnecessary data fetching and enhancing performance.
@@ -38,7 +38,7 @@ This web application is a simple Imgur Gallery Browser developed as part of a co
 - Skeleton loaders: Added for better user experience
 
 
-### Local Setup
+## Local Setup
 
 ```bash
 # Clone the repository
@@ -56,8 +56,27 @@ npm run dev
 npm test
 ```
 
+### Problem with Imgur API on Localhost
 
-### ESLint Configuration
+When running the project locally, you may encounter issues with the Imgur API, particularly API rate limiting on localhost. This is a common practice for many APIs to prevent abuse.
+
+### Workaround
+
+To work around this issue, a modification to your system's hosts file is required. This change will allow you to access the Imgur API without being rate-limited on localhost.
+
+Steps for Ubuntu (only for local testing):
+- Open your terminal.
+- Edit your hosts file by running `sudo nano /etc/hosts`.
+- Add your Local IP address (with local.imgurapi.com) like the bellow line to your hosts file:
+```bash
+# example Local IP address, You have to replace 192.000.0.00 with your local IP address
+192.000.0.00    local.imgurapi.com
+```
+- Save the file and exit the editor.
+- Now, when you run the project locally, use local.imgurapi.com instead of localhost in your browser.
+
+
+## ESLint Configuration
 
 The project's ESLint rules are defined in .eslintrc.json. To check the codebase for linting issues, run:
 
@@ -68,7 +87,7 @@ npm run lint
 This will output any linting errors or warnings based on the project's ESLint rules.
 
 
-### Observations
+## Observations
 
 - Component Libraries: This project does not use component libraries like Material UI, as the challenge did not explicitly mention their usage.
 - Handling Videos: The project includes both images and videos, although the original challenge specified only images. This inclusion impacted the feasibility of implementing pagination or infinite scrolling, as the Imgur API's pagination is designed primarily for images.
