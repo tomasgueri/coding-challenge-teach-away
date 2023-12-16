@@ -5,6 +5,9 @@ import Image from 'next/image';
 // Icons
 import { FaArrowUp, FaArrowDown, FaStar } from 'react-icons/fa';
 
+// Components
+import Button from '../../Atoms/Buttons';
+
 interface ImageDetails {
   id: string;
   title: string;
@@ -27,7 +30,6 @@ const ImageDetailsModal: React.FC<ImageDetailsModalProps> = ({ imageDetails, onC
   return (
     <div className={styles["modal-overlay"]} onClick={onClose}>
       <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
-
         {isVideo ? (
           <video controls className={styles.modalMedia}>
             <source src={imageUrl} type="video/mp4" />
@@ -55,7 +57,7 @@ const ImageDetailsModal: React.FC<ImageDetailsModalProps> = ({ imageDetails, onC
               <span className={styles["score"]}><FaStar title="Score" /> {score}</span>
             }
         </div>}
-        <button onClick={onClose} className={styles["modal-close"]}>Close</button>
+        <Button variant='secondary' text='Close' onClick={onClose} />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import styles from './gallery-filters.module.scss';
 // Components
 import Container from '../../Atoms/Container';
 import SelectInput from '../../Atoms/SelectInput';
+import Button from '../../Atoms/Buttons';
 
 interface Filters {
   section: string;
@@ -73,9 +74,7 @@ const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
             />
           </div>
           <div>
-            <button onClick={handleFilterChange} className={styles.filterButton}>
-              Apply Filters
-            </button>
+            <Button variant='primary' text='Apply Filters' onClick={handleFilterChange} />
           </div>
         </div>
       </Container>
