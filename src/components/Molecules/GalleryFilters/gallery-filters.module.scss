@@ -1,0 +1,111 @@
+.gallery-filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+  background-color: var(--color-light-gray);
+  height: 100px;
+
+  @media (max-width: 768px) {
+    height: 120px;
+  }
+}
+
+.filtersRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & > div {
+    gap: 10px;
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+    & > div {
+      gap: 5px;
+    }
+  }
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.filterButton {
+  background-color: var(--color-light-gray);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: var(--color-light-gray);
+    outline: none;
+  }
+}
+
+// Styles for the Show Viral toggle switch
+.viralInput {
+  display: flex;
+  align-items: center;
+  span {
+    padding-left: 5px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-switch-off);
+  transition: .4s;
+  border-radius: 24px;
+
+  &:before {
+    position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  }
+}
+
+input:checked + .slider {
+  background-color: var(--color-switch-on);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}

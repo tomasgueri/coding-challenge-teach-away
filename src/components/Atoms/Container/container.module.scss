@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  max-width: 1200px; // max-width for large screens
+  padding-right: var(--padding-xl);
+  padding-left: var(--padding-xl);
+  margin-right: auto;
+  margin-left: auto;
+
+  // Responsive breakpoints
+  @media (max-width: 1400px) {
+    padding-right: var(--padding-lg);
+    padding-left: var(--padding-lg);
+  }
+
+  @media (max-width: 1200px) {
+    padding-right: var(--padding-md);
+    padding-left: var(--padding-md);
+  }
+
+  @media (max-width: 992px) {
+    padding-right: var(--padding-md);
+    padding-left: var(--padding-md);
+  }
+
+  @media (max-width: 768px) {
+    padding-right: var(--padding-sm);
+    padding-left: var(--padding-sm);
+  }
+
+  @media (max-width: 576px) {
+    padding-right: var(--padding-xs);
+    padding-left: var(--padding-xs);
+  }
+}
