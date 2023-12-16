@@ -35,6 +35,7 @@ This web application is a simple Imgur Gallery Browser developed as part of a co
 - fetchWithCache Method: Implemented to optimize API calls by caching responses, reducing unnecessary data fetching and enhancing performance.
 - Service Layer: Abstracts the API interactions, making the components cleaner and more maintainable.
 - Next.js: Offers benefits like server-side rendering and improved SEO, which are essential for modern web applications.
+- Skeleton loaders: Added for better user experience
 
 
 ### Local Setup
