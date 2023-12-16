@@ -1,17 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './header.module.scss';
-import logo from './../../../shared/assets/images/logo.png';
 import Container from '../../Atoms/Container';
+import LogoSvg from '../../Atoms/LogoSvg';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <Container >
+    <Container >
+      <header className={styles.header}>
         <div className={styles.logoContainer}>
           <Link href="/">
-            <Image src={logo} alt="Logo" width={50} height={50} priority />
+            <LogoSvg />
           </Link>
         </div>
         <nav className={styles.navigation}>
@@ -22,8 +21,8 @@ const Header = () => {
             Contact
           </Link>
         </nav>
-      </Container>
-    </header>
+      </header>
+    </Container>
   );
 };
 

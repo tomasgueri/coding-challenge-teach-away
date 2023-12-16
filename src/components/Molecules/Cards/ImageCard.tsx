@@ -3,6 +3,9 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './cards.module.scss';
 
+// Lazy loading
+import { useInView } from 'react-intersection-observer';
+
 interface ImageCardProps {
   id: string;
   title: string;
@@ -13,18 +16,25 @@ interface ImageCardProps {
 }
 
 const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl, tags, onClick }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: '100px',
+  });
+
   return (
-    <div key={id} className={`${styles.card} ${styles.imageCard}`} onClick={onClick}>
-      <div style={{ minHeight: '100%', position: 'relative' }}>
-        <Image
-          src={imageUrl}
-          alt={title}
-          className={styles.image}
-          objectFit="cover"
-          width={600}
-          height={400}
-        />
-      </div>
+    <div data-testid={`image-card-${id}`} ref={ref} key={id} className={`${styles.card} ${styles.imageCard}`} onClick={onClick}>
+      {inView && (
+        <div style={{ minHeight: '100%', position: 'relative' }}>
+          <Image
+            src={imageUrl}
+            alt={title}
+            className={styles.image}
+            objectFit="cover"
+            width={600}
+            height={400}
+          />
+        </div>
+      )}
       <div className={styles.infoOverlay}>
         {title && <div className={styles.title}>{title}</div> }
         { description && <div className={styles.description}>{description}</div> }

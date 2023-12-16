@@ -3,16 +3,12 @@ import { fetchGallery } from './galleryThunks';
 
 interface GalleryState {
   images: any[];
-  currentPage: number;
-  totalPages: number;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: GalleryState = {
   images: [],
-  currentPage: 1,
-  totalPages: 0,
   isLoading: false,
   error: null,
 };
@@ -24,18 +20,11 @@ export const gallerySlice = createSlice({
     setImages: (state, action: PayloadAction<any[]>) => {
       state.images = action.payload;
     },
-    setCurrentPage: (state, action: PayloadAction<number>) => {
-      state.currentPage = action.payload;
-    },
-    setTotalPages: (state, action: PayloadAction<number>) => {
-      state.totalPages = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[]; totalPages: number }>) => {
+      .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[] }>) => {
         state.images = action.payload.images;
-        state.totalPages = action.payload.totalPages;
         state.isLoading = false;
       })
       .addCase(fetchGallery.pending, (state) => {
@@ -49,6 +38,6 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const { setImages, setCurrentPage, setTotalPages } = gallerySlice.actions;
+export const { setImages } = gallerySlice.actions;
 
 export const galleryReducer = gallerySlice.reducer;

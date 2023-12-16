@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import styles from './cards.module.scss';
 
+// Lazy loading
+import { useInView } from 'react-intersection-observer';
+
 interface VideoCardProps {
   id: string;
   title: string;
@@ -12,6 +15,10 @@ interface VideoCardProps {
 
 const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl, tags, onClick }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: '100px',
+  });
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
@@ -28,16 +35,20 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl,
 
   return (
     <div
+      ref={ref}
       key={id}
+      data-testid={`video-card-${id}`}
       className={`${styles.card} ${styles.videoCard}`}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <video className={styles.video} muted loop ref={videoRef}>
-        <source src={videoUrl} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {inView && (
+        <video className={styles.video} muted loop ref={videoRef}>
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       <div className={styles.infoOverlay}>
         { title && <div className={styles.title}>{title}</div> }
         { description && <div className={styles.description}>{description}</div> }

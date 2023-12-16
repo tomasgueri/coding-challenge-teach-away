@@ -3,7 +3,6 @@ import { getGallery } from '../services/imgurService';
 
 interface GalleryApiResponse {
   images: any[];
-  totalPages: number;
 }
 
 interface ImgurApiResponseItem {
@@ -16,13 +15,13 @@ interface ImgurApiResponseItem {
 
 export const fetchGallery = createAsyncThunk<
   GalleryApiResponse,
-  { section: string; sort: string; window: string; page: number },
+  { section: string; sort: string; window: string; },
   { rejectValue: string }
 >(
   'gallery/fetchGallery',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await getGallery(params.section, params.sort, params.window, params.page);
+      const response = await getGallery(params.section, params.sort, params.window);
       console.log('response', response)
       return {
         images: response?.data.map((item: ImgurApiResponseItem) => {
@@ -31,7 +30,6 @@ export const fetchGallery = createAsyncThunk<
             imageUrl: Array.isArray(item.images) && item.images?.length > 0 ? item?.images[0]?.link : item.link, // For albums, use the first image
           };
         }),
-        totalPages: calculateTotalPages(response?.data, 20), // Implement this function based on the response
       };
     } catch (error: any) {
       console.log('Error: ', error);
@@ -39,11 +37,3 @@ export const fetchGallery = createAsyncThunk<
     }
   }
 );
-
-// This is a placeholder function.
-// You need to adjust it based on the actual pagination data provided by the Imgur API.
-function calculateTotalPages(response: ImgurApiResponseItem[], itemsPerPage: number): number {
-  // If the API provides total items directly, use that instead
-  const totalItems = response.length; // Replace with the actual total items if available
-  return Math.ceil(totalItems / itemsPerPage);
-}

@@ -3,6 +3,7 @@ import styles from './gallery-filters.module.scss';
 
 // Components
 import Container from '../../Atoms/Container';
+import SelectInput from '../../Atoms/SelectInput';
 
 interface GalleryFiltersProps {
   onFilterChange: (filters: any) => void;
@@ -22,61 +23,54 @@ const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
     <div className={styles['gallery-filters']}>
       <Container>
         <div className={styles.filtersRight}>
-          <div className={styles.selectWrapper}>
-            <select
-              value={section}
-              onChange={(e) => setSection(e.target.value)}
-              className={styles.selectElement}
-            >
-              <option value="hot">Hot</option>
-              <option value="top">Top</option>
-              <option value="user">User</option>
-            </select>
-          </div>
-
           <div>
-          <label className={styles.switch}>
-            <input
-              type="checkbox"
-              checked={showViral}
-              onChange={() => setShowViral(!showViral)}
+            <SelectInput
+              value={section}
+              onChange={(value) => setSection(value)}
+              options={[
+                { value: 'hot', label: 'Hot' },
+                { value: 'top', label: 'Top' },
+                { value: 'user', label: 'User' },
+              ]}
             />
-            <span className={styles.slider}></span>
-          </label>
-          <span>Show Viral</span>
+            <div className={styles.viralInput}>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={showViral}
+                  onChange={() => setShowViral(!showViral)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span>Show Viral</span>
+            </div>
+            <SelectInput
+              value={section}
+              onChange={(value) => setWindow(value)}
+              options={[
+                { value: 'day', label: 'Day' },
+                { value: 'week', label: 'Week' },
+                { value: 'month', label: 'Month' },
+                { value: 'year', label: 'Year' },
+                { value: 'all', label: 'All' },
+              ]}
+            />
+            <SelectInput
+              value={section}
+              onChange={(value) => setSort(value)}
+              options={[
+                { value: 'viral', label: 'Viral' },
+                { value: 'top', label: 'Top' },
+                { value: 'time', label: 'Time' },
+              ]}
+            />
           </div>
-
-          <div className={styles.selectWrapper}>
-            <select
-              value={window}
-              onChange={(e) => setWindow(e.target.value)}
-              className={styles.selectElement}
-            >
-              <option value="day">Day</option>
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="year">Year</option>
-              <option value="all">All</option>
-            </select>
+          <div>
+            <button onClick={handleFilterChange} className={styles.filterButton}>
+              Apply Filters
+            </button>
           </div>
-
-          <div className={styles.selectWrapper}>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              className={styles.selectElement}
-            >
-              <option value="viral">Viral</option>
-              <option value="top">Top</option>
-              <option value="time">Time</option>
-            </select>
-          </div>
-
-          <button onClick={handleFilterChange} className={styles.filterButton}>
-            Apply Filters
-          </button>
         </div>
-
       </Container>
     </div>
   );

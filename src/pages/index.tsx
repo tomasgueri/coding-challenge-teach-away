@@ -12,27 +12,23 @@ import Header from '../components/Molecules/Header';
 import Container from '../components/Atoms/Container';
 import GalleryFilters from '../components/Molecules/GalleryFilters';
 import Gallery from '../components/Organisms/Gallery';
-import Pagination from '../components/Molecules/Pagination';
 import Skeleton from '../components/Molecules/Skeleton';
 
 type Filters = {
   section: string;
   sort: string;
   window: string;
-  page: number;
   showViral: boolean;
 };
 
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { images } = useSelector((state: RootState) => state.gallery);
-  const [totalPages, setTotalPages] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     section: 'hot',
     sort: 'viral',
     window: 'day',
-    page: 0,
     showViral: true,
   });
 
@@ -44,11 +40,6 @@ const HomePage = () => {
   const handleFilterChange = (newFilters: Partial<Filters>) => {
     setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
     setIsLoading(true);
-  };
-
-  const handlePageChange = (newPage: number) => {
-    console.log('newPage', newPage)
-    setFilters((prevFilters) => ({ ...prevFilters, page: newPage }));
   };
 
   useEffect(() => {
@@ -73,11 +64,6 @@ const HomePage = () => {
           ) : (
             <>
               <Gallery data={images} />
-              <Pagination
-                currentPage={filters.page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
             </>
           )}
         </Container>

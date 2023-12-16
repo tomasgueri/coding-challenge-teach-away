@@ -11,21 +11,27 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  & > div {
+    gap: 10px;
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+    & > div {
+      gap: 20px;
+    }
+  }
 }
 
-.selectElement,
 .filterButton {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin-left: 1rem;
   font-size: 0.9rem;
   cursor: pointer;
-}
-
-.selectElement {
-  border: 1px solid var(--color-gray);
-  background: var(--color-primary);
-  color: var(--color-light-gray);
 }
 
 .filterButton {
@@ -42,25 +48,24 @@
   }
 }
 
-// Custom arrow for select elements
-.selectElement {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  position: relative;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="12" viewBox="0 0 5 7" xmlns="http://www.w3.org/2000/svg"><path fill="%23FFF" d="M0 2l5 2-5 2z"/></svg>'); /* Adjust the SVG path if necessary */
-  background-repeat: no-repeat;
-  background-position: right 0.3rem center; /* Fine-tune this value to align the arrow correctly */
-  background-size: 12px 12px;
+// Styles for the Show Viral toggle switch
+.viralInput {
+  display: flex;
+  align-items: center;
+  span {
+    padding-left: 5px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
-// Styles for the Show Viral toggle switch
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px; // Adjust the width as needed
-  height: 24px; // Adjust the height as needed
-  margin-left: 1rem; // Adjust the margin as needed for spacing
+  width: 50px;
+  height: 24px;
 }
 
 .switch input {
@@ -85,8 +90,8 @@
   content: "";
   height: 20px;
   width: 20px;
-  left: 2px; // Adjust for alignment
-  bottom: 2px; // Adjust for alignment
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   transition: .4s;
   border-radius: 50%;
@@ -94,7 +99,7 @@
 }
 
 input:checked + .slider {
-  background-color: var(--color-switch-on); // On state color
+  background-color: var(--color-switch-on);
 }
 
 input:checked + .slider:before {
