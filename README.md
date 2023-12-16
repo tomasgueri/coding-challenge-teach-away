@@ -97,7 +97,7 @@ This will output any linting errors or warnings based on the project's ESLint ru
 ## Delivery and Pull Request
 
 ### Merging the Pull Request
-For the purpose of this challenge, I have merged the main pull request (#1)[(#1)](https://github.com/tomasgueri/coding-challenge-teach-away/pull/1) into the master branch. This decision was made to ensure that the production deployment on Vercel reflects the most recent and complete version of the application. The merged PR provides a comprehensive view of the development process, including code changes, commit history, and discussions.
+For the purpose of this challenge, I have merged the main pull request [(#1)](https://github.com/tomasgueri/coding-challenge-teach-away/pull/1) into the master branch. This decision was made to ensure that the production deployment on Vercel reflects the most recent and complete version of the application. The merged PR provides a comprehensive view of the development process, including code changes, commit history, and discussions.
 
 ### Production Deployment
 The application is deployed on Vercel, and the production environment can be accessed via the following link: [Gallery App - Production Deployment](https://coding-challenge-teach-away.vercel.app/).
