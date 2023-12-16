@@ -5,6 +5,10 @@
   padding: 1rem;
   background-color: var(--color-light-gray);
   height: 100px;
+
+  @media (max-width: 768px) {
+    height: 120px;
+  }
 }
 
 .filtersRight {
@@ -21,7 +25,7 @@
     flex-direction: column;
     gap: 10px;
     & > div {
-      gap: 20px;
+      gap: 5px;
     }
   }
 }
