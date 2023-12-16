@@ -102,7 +102,7 @@ For the purpose of this challenge, I have merged the main pull request [(#1)](ht
 ### Production Deployment
 The application is deployed on Vercel, and the production environment can be accessed via the following link: [Gallery App - Production Deployment](https://coding-challenge-teach-away.vercel.app/).
 
-## Accessibility of the Deployment Preview
+### Accessibility of the Deployment Preview
 It's important to note that the Vercel deployment preview link generated for the pull request was only accessible to me as the owner of the Vercel account. To ensure that reviewers and other interested parties can access and review the application without any restrictions, the decision to merge the pull request was made. The production deployment link provided above is accessible to everyone, facilitating a straightforward review process.
 
 ### Reviewing the Closed Pull Request
