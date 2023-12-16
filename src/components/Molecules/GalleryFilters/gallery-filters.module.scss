@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
 
   & > div {
     gap: 10px;
@@ -27,28 +28,6 @@
     & > div {
       gap: 5px;
     }
-  }
-}
-
-.filterButton {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin-left: 1rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.filterButton {
-  background-color: var(--color-light-gray);
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: var(--color-primary);
-    color: var(--color-light-gray);
-    outline: none;
   }
 }
 
