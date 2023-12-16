@@ -13,7 +13,7 @@ interface ImageDetails {
   ups?: number; // Upvotes
   downs?: number; // Downvotes
   score?: number;
-  isVideo: boolean;
+  isVideo?: boolean;
 }
 
 interface ImageDetailsModalProps {

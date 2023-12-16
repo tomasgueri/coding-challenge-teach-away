@@ -1,8 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getGallery } from '../services/imgurService';
 
+interface GalleryImage {
+  id: string;
+  title: string;
+  description?: string;
+  imageUrl: string;
+}
+
 interface GalleryApiResponse {
-  images: any[];
+  images: GalleryImage[];
 }
 
 interface ImgurApiResponseItem {
@@ -31,7 +38,7 @@ export const fetchGallery = createAsyncThunk<
           };
         }),
       };
-    } catch (error: any) {
+    } catch (error) {
       console.log('Error: ', error);
       return rejectWithValue('Failed to fetch gallery');
     }

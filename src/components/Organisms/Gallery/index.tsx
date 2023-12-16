@@ -6,17 +6,20 @@ import ImageDetailsModal from '../../Molecules/ImageDetailsModal';
 import ImageCard from '../../Molecules/Cards/ImageCard';
 import VideoCard from '../../Molecules/Cards/VideoCard';
 
+type Tag = {
+  name?: string;
+};
+
 type Image = {
   id: string;
   title: string;
   description?: string;
   imageUrl: string;
-  images: any[];
-  tags: any[];
+  tags?: Tag[];
   ups?: number; // Upvotes
   downs?: number; // Downvotes
   score?: number;
-  isVideo: boolean;
+  isVideo?: boolean;
 };
 
 interface GalleryProps {
@@ -46,34 +49,6 @@ const Gallery: React.FC<GalleryProps> = ({ data }) => {
       {data.map((item) => {
         // Check if the item is an image or a video
         const isVideo = item.imageUrl.includes('mp4');
-        /* const CardComponent: React.ElementType = isVideo ?
-          <VideoCard
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            videoUrl={item.imageUrl}
-            tags={item.tags}
-            onClick={() => handleImageClick(item)}
-          /> :
-          <ImageCard
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            tags={item.tags}
-            onClick={() => handleImageClick(item)}
-          />;
-
-          return (
-            <CardComponent
-              key={item.id}
-              {...item}
-              onClick={() => handleImageClick(item)}
-              data-testid={`card-${item.id}`} // Add this line
-            />
-          ); */
 
         return isVideo ? (
           <VideoCard

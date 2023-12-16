@@ -4,12 +4,16 @@ import styles from './cards.module.scss';
 // Lazy loading
 import { useInView } from 'react-intersection-observer';
 
+type Tag = {
+  name?: string;
+};
+
 interface VideoCardProps {
   id: string;
   title: string;
   description?: string;
   videoUrl: string;
-  tags: any[];
+  tags?: Tag[];
   onClick: () => void;
 }
 
@@ -37,7 +41,6 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl,
     <div
       ref={ref}
       key={id}
-      data-testid={`video-card-${id}`}
       className={`${styles.card} ${styles.videoCard}`}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
@@ -52,7 +55,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, title, description, videoUrl,
       <div className={styles.infoOverlay}>
         { title && <div className={styles.title}>{title}</div> }
         { description && <div className={styles.description}>{description}</div> }
-        { tags.length > 0 &&
+        { (tags && tags.length > 0) &&
           <div className={styles.tagsContainer}>
             {tags.slice(0, 4).map((tag, index) => (
               <span key={index} className={styles.tag}>{tag.name}</span>

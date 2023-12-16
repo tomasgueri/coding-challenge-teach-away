@@ -1,8 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchGallery } from './galleryThunks';
 
+type Tag = {
+  name?: string;
+};
+interface GalleryImage {
+  id: string;
+  title: string;
+  description?: string;
+  imageUrl: string;
+  tags?: Tag[];
+  ups?: number; // Upvotes
+  downs?: number; // Downvotes
+  score?: number;
+}
+
 interface GalleryState {
-  images: any[];
+  images: GalleryImage[];
   isLoading: boolean;
   error: string | null;
 }
@@ -17,13 +31,13 @@ export const gallerySlice = createSlice({
   name: 'gallery',
   initialState,
   reducers: {
-    setImages: (state, action: PayloadAction<any[]>) => {
+    setImages: (state, action: PayloadAction<GalleryImage[]>) => {
       state.images = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: any[] }>) => {
+      .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<{ images: GalleryImage[] }>) => {
         state.images = action.payload.images;
         state.isLoading = false;
       })

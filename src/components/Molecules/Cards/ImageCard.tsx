@@ -1,4 +1,3 @@
-// ImageCard.tsx
 import React from 'react';
 import Image from 'next/image';
 import styles from './cards.module.scss';
@@ -6,11 +5,15 @@ import styles from './cards.module.scss';
 // Lazy loading
 import { useInView } from 'react-intersection-observer';
 
+type Tag = {
+  name?: string;
+};
+
 interface ImageCardProps {
   id: string;
   title: string;
   description?: string;
-  tags: any[];
+  tags?: Tag[];
   imageUrl: string;
   onClick: () => void;
 }
@@ -22,7 +25,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl,
   });
 
   return (
-    <div data-testid={`image-card-${id}`} ref={ref} key={id} className={`${styles.card} ${styles.imageCard}`} onClick={onClick}>
+    <div ref={ref} key={id} className={`${styles.card} ${styles.imageCard}`} onClick={onClick}>
       {inView && (
         <div style={{ minHeight: '100%', position: 'relative' }}>
           <Image
@@ -38,7 +41,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ id, title, description, imageUrl,
       <div className={styles.infoOverlay}>
         {title && <div className={styles.title}>{title}</div> }
         { description && <div className={styles.description}>{description}</div> }
-        { tags.length > 0 &&
+        { tags && tags.length > 0 &&
           <div className={styles.tagsContainer}>
             {tags.slice(0, 4).map((tag, index) => (
               <span key={index} className={styles.tag}>{tag.name}</span>

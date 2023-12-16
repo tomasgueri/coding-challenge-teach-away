@@ -10,7 +10,7 @@
   justify-content: space-between;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 2rem; // Space between cards
+  margin-bottom: 2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;
 
@@ -43,7 +43,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    color: #f0f0f0; // Lighter text for better readability
+    color: #f0f0f0;
     box-sizing: border-box;
     transition: background-color 0.3s ease;
     opacity: 1; // Make it always visible

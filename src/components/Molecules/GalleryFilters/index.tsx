@@ -5,8 +5,15 @@ import styles from './gallery-filters.module.scss';
 import Container from '../../Atoms/Container';
 import SelectInput from '../../Atoms/SelectInput';
 
+interface Filters {
+  section: string;
+  sort: string;
+  window: string;
+  showViral: boolean;
+}
+
 interface GalleryFiltersProps {
-  onFilterChange: (filters: any) => void;
+  onFilterChange: (filters: Filters) => void;
 }
 
 const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
@@ -45,7 +52,7 @@ const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
               <span>Show Viral</span>
             </div>
             <SelectInput
-              value={section}
+              value={window}
               onChange={(value) => setWindow(value)}
               options={[
                 { value: 'day', label: 'Day' },
@@ -56,7 +63,7 @@ const GalleryFilters: React.FC<GalleryFiltersProps> = ({ onFilterChange }) => {
               ]}
             />
             <SelectInput
-              value={section}
+              value={sort}
               onChange={(value) => setSort(value)}
               options={[
                 { value: 'viral', label: 'Viral' },
